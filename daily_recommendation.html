@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日指引 - 玄环阁</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .recommendation-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* 左窄右宽 */
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .fortune-desc, .product-recommendation {
+            padding: 25px;
+        }
+        .fortune-desc h3 { margin-top: 0; }
+        .fortune-desc .element-highlight {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border: 1px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .product-card {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-color); /* slightly darker than card for emphasis */
+        }
+        .product-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--secondary-color);
+        }
+        .product-info h4 { margin-top: 0; margin-bottom: 10px; }
+        .product-info p { margin-bottom: 5px; font-size: 0.9em; }
+        .purchased-badge {
+            background-color: #28a745; /* 绿色表示已购买 */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .recommendation-container {
+                grid-template-columns: 1fr; /* 移动端堆叠 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">玄环阁</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="profile.html">个人中心</a></li>
+                    <li><a href="daily_recommendation.html" class="active">今日指引</a></li>
+                    <li><a href="store.html">五行商城</a></li>
+                    <li><a href="about.html">我们是谁</a></li>
+                    <li><a href="#" id="logoutBtn">退出登录</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>今日专属指引</h1>
+        <div class="card recommendation-container">
+            <div class="fortune-desc">
+                <h3>今日宜佩戴</h3>
+                <p>尊敬的 [用户名]，根据您的八字五行分析（您的日元为X，喜用神为Y）：</p>
+                <p>今日宇宙能量流转，最宜เสริม旺您的 <span class="element-highlight" id="recommendedElement"> [金] </span> 属性，以助您财运亨通，事事顺遂。</p>
+                <p id="fortuneText">佩戴对应五行的饰品，能够调和自身气场，吸引积极能量。今日推荐饰品主要材质为金属类或白色、金色系。</p>
+                </div>
+            <div class="product-recommendation">
+                <h3>为您推荐</h3>
+                <div class="product-card" id="recommendedProductNew">
+                    <img src="placeholder_gold_bracelet.jpg" alt="金曜石手串">
+                    <div class="product-info">
+                        <h4>辉煌金曜石招财手串</h4>
+                        <p>材质：天然金曜石，925银配饰</p>
+                        <p>五行属性：强金</p>
+                        <p>功效：强力招财，辟邪护身，提升决断力。</p>
+                        <p>价格：¥888</p>
+                        <a href="product_detail.html?id=123" class="button">前往选购</a>
+                    </div>
+                </div>
+
+                <div class="product-card" id="recommendedProductPurchased" style="display:none;">
+                    <img src="placeholder_purchased_item.jpg" alt="已购商品">
+                    <div class="product-info">
+                        <h4>[已购商品名称]</h4>
+                        <p>您已于 [购买日期] 选购此款开运饰品。</p>
+                        <p class="purchased-badge">已拥有</p>
+                        <a href="order_detail.html?orderId=XYZ" class="button">查看详情</a>
+                        <p style="margin-top: 10px;">今日佩戴它，愿好运相伴！</p>
+                    </div>
+                </div>
+                 </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 玄环阁. 运势由我，饰品由心。</p>
+    </footer>
+
+    <script>
+        // 模拟用户登录状态和数据
+        const MOCK_USER_DATA = {
+            username: "尊贵的用户",
+            baziInfo: { dailyElement: "金", description: "金能生水，水为财，今日金旺可催财...",喜用神:"金"},
+            recommendedProduct: {
+                id: "prod001",
+                name: "纯银招财貔貅手链",
+                image: "images/silver_pixiu.jpg", // 替换为真实图片路径
+                attributes: "纯银, 貔貅",
+                fiveElement: "金",
+                description: "庇佑财运，吸纳四方之财。",
+                price: "¥699",
+                isPurchased: false, // 后台判断用户是否购买过此推荐
+                purchaseDate: "2024-12-01", // 如果购买过
+                orderId: "ORD12345"
+            }
+            // ... 其他用户数据
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 实际应用中，这些数据会从后端API获取
+            document.querySelector('.fortune-desc h3').textContent = `今日宜佩戴`;
+            document.querySelector('.fortune-desc p:first-of-type').innerHTML = `尊敬的 ${MOCK_USER_DATA.username}，根据您的八字五行分析（您的日元为X，喜用神为${MOCK_USER_DATA.baziInfo.喜用神}）：`;
+            document.getElementById('recommendedElement').textContent = MOCK_USER_DATA.baziInfo.dailyElement;
+            document.getElementById('fortuneText').textContent = MOCK_USER_DATA.baziInfo.description;
+            
+            const productNewDiv = document.getElementById('recommendedProductNew');
+            const productPurchasedDiv = document.getElementById('recommendedProductPurchased');
+
+            if (MOCK_USER_DATA.recommendedProduct.isPurchased) {
+                productNewDiv.style.display = 'none';
+                productPurchasedDiv.style.display = 'flex';
+                productPurchasedDiv.querySelector('img').src = MOCK_USER_DATA.recommendedProduct.image;
+                productPurchasedDiv.querySelector('h4').textContent = MOCK_USER_DATA.recommendedProduct.name;
+                productPurchasedDiv.querySelector('p:nth-of-type(1)').textContent = `您已于 ${MOCK_USER_DATA.recommendedProduct.purchaseDate} 选购此款开运饰品。`;
+                productPurchasedDiv.querySelector('a.button').href = `order_detail.html?orderId=${MOCK_USER_DATA.recommendedProduct.orderId}`;
+            } else {
+                productPurchasedDiv.style.display = 'none';
+                productNewDiv.style.display = 'flex';
+                productNewDiv.querySelector('img').src = MOCK_USER_DATA.recommendedProduct.image;
+                productNewDiv.querySelector('h4').textContent = MOCK_USER_DATA.recommendedProduct.name;
+                productNewDiv.querySelector('.product-info p:nth-of-type(1)').textContent = `材质： ${MOCK_USER_DATA.recommendedProduct.attributes}`;
+                productNewDiv.querySelector('.product-info p:nth-of-type(2)').textContent = `五行属性： ${MOCK_USER_DATA.recommendedProduct.fiveElement}`;
+                productNewDiv.querySelector('.product-info p:nth-of-type(3)').textContent = MOCK_USER_DATA.recommendedProduct.description;
+                productNewDiv.querySelector('.product-info p:nth-of-type(4)').textContent = `价格： ${MOCK_USER_DATA.recommendedProduct.price}`;
+                productNewDiv.querySelector('a.button').href = `product_detail.html?id=${MOCK_USER_DATA.recommendedProduct.id}`;
+            }
+
+
+            document.getElementById('logoutBtn').addEventListener('click', function(e){
+                e.preventDefault();
+                // 清除登录状态（例如localStorage, cookie），然后跳转到登录页
+                alert('已退出登录（模拟）');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

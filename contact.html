@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 玄环阁</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .contact-form h3, .contact-info h3 { margin-top: 0; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--secondary-color); }
+        .form-group input, .form-group textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #555;
+            background-color: #333;
+            color: var(--text-color);
+            font-size: 1em;
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .contact-info p { margin-bottom: 15px; line-height: 1.8; }
+        .contact-info strong { color: var(--secondary-color); }
+        .social-icons { margin-top: 20px; }
+        .social-icons a {
+            margin-right: 15px;
+            text-decoration: none;
+            /* 在此添加社交媒体图标样式，例如使用 FontAwesome */
+        }
+        .social-icons img { width:32px; height:32px; filter: grayscale(50%) brightness(1.5); transition: filter 0.3s; }
+        .social-icons img:hover { filter: grayscale(0%) brightness(1); }
+
+        @media (max-width: 768px) {
+            .contact-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+       </header>
+
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 40px;">与我们取得联系</h1>
+        <div class="card contact-container">
+            <div class="contact-form">
+                <h3>给我们留言</h3>
+                <p>有任何疑问、建议或合作意向？请填写下表，我们会尽快与您联系。</p>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">您的称呼</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">主题</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="button">发送消息</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>联系方式</h3>
+                <p>我们珍视每一次与您的交流。玄环阁致力于为您提供贴心、专业的服务。</p>
+                <p><strong>客服邮箱:</strong> <a href="mailto:service@xuanhuange.com" style="color:var(--secondary-color);">service@xuanhuange.com</a></p>
+                <p><strong>服务时间:</strong> 周一至周五，北京时间 9:00 - 18:00</p>
+                <p><strong>地址 (若有):</strong> 中国·北京市朝阳区XX路XX号玄环阁（此为示例）</p>
+                
+                <div class="social-icons">
+                    <p><strong>关注我们:</strong></p>
+                    <a href="#" title="微信公众号"><img src="placeholder_wechat_icon.png" alt="微信"></a>
+                    <a href="#" title="微博"><img src="placeholder_weibo_icon.png" alt="微博"></a>
+                    </div>
+                <p style="margin-top:20px; font-size:0.9em;">我们承诺对您的个人信息严格保密。您的信任是我们前进的动力。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 在这里添加表单提交逻辑，例如通过 fetch API 发送到后端
+            alert('消息已发送（模拟）！感谢您的反馈。');
+            this.reset(); // 清空表单
+        });
+    </script>
+</body>
+</html>

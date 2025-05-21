@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开启您的五行之旅 - 注册</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .registration-form { max-width: 500px; margin: 40px auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--secondary-color); }
+        .form-group input, .form-group select {
+            width: calc(100% - 22px); /* Account for padding */
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #555;
+            background-color: #333;
+            color: var(--text-color);
+            font-size: 1em;
+        }
+        .form-group .datetime-inputs { display: flex; gap: 10px; }
+        .form-group .datetime-inputs input,
+        .form-group .datetime-inputs select { flex-grow: 1; }
+        .birth-time-notice { font-size: 0.9em; color: #ccc; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">玄环阁</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="login.html">登录</a></li>
+                    <li><a href="about.html">我们是谁</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card registration-form">
+            <h2>探索命运，从此刻开始</h2>
+            <p>请提供您的出生信息，我们将为您揭示五行奥秘。</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">公历出生年月日</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthtime">出生时辰 (24小时制)</label>
+                    <div class="datetime-inputs">
+                        <select id="birthhour" name="birthhour" required>
+                            <option value="">选择小时</option>
+                            </select>
+                        </div>
+                    <p class="birth-time-notice">时辰对于八字测算至关重要，请务必准确填写。</p>
+                </div>
+                <button type="submit" class="button">立即注册</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 玄环阁. 探索宇宙玄秘，平衡五行人生。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hourSelect = document.getElementById('birthhour');
+            for (let i = 0; i < 24; i++) {
+                const hour = String(i).padStart(2, '0');
+                const option = new Option(`${hour} 时`, hour);
+                hourSelect.add(option);
+            }
+
+            const registerForm = document.getElementById('registerForm');
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                // 在这里添加表单验证和提交逻辑
+                // 例如: const username = document.getElementById('username').value;
+                // ... 然后通过 fetch API 发送到后端
+                alert('注册信息已收集（模拟）！实际应用中将发送至服务器。');
+                // 实际会跳转到登录页或个人中心
+            });
+        });
+    </script>
+</body>
+</html>

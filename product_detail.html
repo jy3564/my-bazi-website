@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品详情 - 玄环阁</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <style>
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .product-viewer model-viewer {
+            width: 100%;
+            height: 450px;
+            background-color: #222; /* 背景色，确保模型可见 */
+            border-radius: var(--border-radius);
+            border: 1px solid var(--secondary-color);
+        }
+        .product-info-panel h1 { margin-top: 0; color: var(--secondary-color); }
+        .product-price { font-size: 1.8em; color: var(--secondary-color); margin: 15px 0; }
+        .product-attributes p { margin: 8px 0; }
+        .product-attributes strong { color: #bbb; }
+        .add-to-cart-btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .product-description { margin-top: 30px; }
+
+        @media (max-width: 800px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+            }
+            .product-viewer model-viewer { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        </header>
+
+    <div class="container">
+        <div class="product-detail-container card">
+            <div class="product-viewer">
+                <model-viewer src="path/to/your_3d_model.glb"  
+                              alt="A 3D model of an accessory"
+                              auto-rotate
+                              camera-controls
+                              environment-image="neutral" 
+                              shadow-intensity="1">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                </model-viewer>
+                <p style="text-align: center; font-size: 0.9em; margin-top: 10px;">拖动模型可旋转查看</p>
+            </div>
+            <div class="product-info-panel">
+                <h1>辉煌金曜石招财手串</h1>
+                <p class="product-price">¥888.00</p>
+                <div class="product-attributes">
+                    <p><strong>材质:</strong> 天然金曜石, 925银</p>
+                    <p><strong>五行:</strong> 金</p>
+                    <p><strong>规格:</strong> 珠径10mm, 适合手围15-18cm</p>
+                    <p><strong>库存:</strong> <span id="stockStatus">充足</span></p>
+                </div>
+                <button class="button add-to-cart-btn">加入购物车</button>
+                <div class="product-description">
+                    <h3>商品描述</h3>
+                    <p>此款金曜石手串，精选上等金曜石打磨而成，色泽深邃，金眼灵动。金曜石属金，具有强大的招财、纳福能量...</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        </footer>
+    <script>
+        // 可在此处添加更多交互，例如选择规格、数量等
+        // 实际应用中，商品信息会从后端动态加载
+        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            // 添加到购物车的逻辑
+            alert('商品已加入购物车（模拟）！');
+            // 可能需要更新购物车图标数量等
+        });
+    </script>
+</body>
+</html>
